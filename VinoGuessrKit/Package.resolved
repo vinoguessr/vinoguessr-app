@@ -139,8 +139,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-http-types.git",
       "state" : {
-        "revision" : "db774a277f60063a32d854f2980299caf06da041",
-        "version" : "1.6.0"
+        "revision" : "bff4b6903cdc99dda49649dd52f46c11cfd3ed50",
+        "version" : "1.8.0"
       }
     },
     {
@@ -256,8 +256,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/square/Valet.git",
       "state" : {
-        "revision" : "246baf6be3f9e3ff116dc05251a08f69dd7c7b9d",
-        "version" : "5.1.0"
+        "revision" : "43f517941ced37752c0cd5e2b53a3c9d021c848b",
+        "version" : "5.1.1"
       }
     }
   ],
