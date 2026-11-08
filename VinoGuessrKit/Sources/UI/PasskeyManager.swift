@@ -3,7 +3,7 @@ import AuthenticationServices
 import API
 
 /// Builds passkey (WebAuthn) requests and converts AuthenticationServices
-/// results into the Blindlog API request models.
+/// results into the VinoGuessr API request models.
 ///
 /// The request is performed by SwiftUI's `@Environment(\.authorizationController)`
 /// (`AuthorizationController`), which presents the system UI itself — no
@@ -14,7 +14,7 @@ import API
 /// apple-app-site-association must list this app, or the system rejects the
 /// request at runtime.
 enum Passkey {
-  static let relyingPartyID = "api.blindlog.me"
+  static let relyingPartyID = "api.vinoguessr.com"
 
   enum PasskeyError: Error { case invalidChallenge, unexpectedResult }
 

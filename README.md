@@ -1,2 +1,2 @@
-# BlindLogApp
-BlindLog App
+# VinoGuessr
+VinoGuessr iOS App

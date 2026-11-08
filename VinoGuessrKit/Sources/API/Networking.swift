@@ -3,13 +3,13 @@ import HTTPClient
 import URLSessionHTTPClient
 import HTTPTypesFoundation
 
-/// Shared transport behavior for the Blindlog API clients.
+/// Shared transport behavior for the VinoGuessr API clients.
 ///
 /// Conforming types provide a `baseURL` and an `httpClient`; this extension
 /// builds requests, sends them, and validates the response status, following
 /// the same conventions used throughout the package (default `JSONEncoder`
 /// and `JSONDecoder`, whose default date strategy is seconds since the 2001
-/// reference date — what the Blindlog API uses for its `number` date fields).
+/// reference date — what the VinoGuessr API uses for its `number` date fields).
 protocol APIEndpoint {
   var baseURL: URL { get }
   var httpClient: URLSession { get }
@@ -88,7 +88,7 @@ extension APIEndpoint {
   /// Encodes a value as a JSON request body.
   ///
   /// Dates use the `JSONEncoder` default strategy (seconds since the 2001
-  /// reference date), which is what the Blindlog API itself uses for its
+  /// reference date), which is what the VinoGuessr API itself uses for its
   /// `number` date fields.
   func encode<Body: Encodable>(_ value: Body) throws -> Data {
     try JSONEncoder().encode(value)

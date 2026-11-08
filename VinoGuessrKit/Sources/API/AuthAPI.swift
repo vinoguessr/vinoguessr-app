@@ -7,7 +7,7 @@ import MemberwiseInit
 /// passkey/email challenges, public user lookup, and system documents).
 @MemberwiseInit(.public)
 public struct AuthAPI: APIEndpoint, Sendable {
-  public var baseURL: URL = URL(string: "https://api.blindlog.me")!
+  public var baseURL: URL = URL(string: "https://api.vinoguessr.com")!
   public var httpClient: URLSession = .shared
 
   // MARK: System

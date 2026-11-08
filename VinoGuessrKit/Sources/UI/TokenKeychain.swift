@@ -17,7 +17,7 @@ struct TokenKeychain: Sendable {
     // migrate to a restored or new device. `.afterFirstUnlock` (vs `.whenUnlocked`)
     // still allows reads while the device is locked, e.g. during background refresh.
     self.valet = Valet.valet(
-      withExplicitlySet: Identifier(nonEmpty: "me.blindlog.vinoguessr.tokens")!,
+      withExplicitlySet: Identifier(nonEmpty: "com.vinoguessr.app.tokens")!,
       accessibility: .afterFirstUnlockThisDeviceOnly
     )
   }
