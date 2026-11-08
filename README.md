@@ -1,5 +1,5 @@
 # VinoGuessr
-VinoGuessr iOS App
+VinoGuessr app for iOS, iPadOS, and macOS
 
 <!-- vinoguessr-foundation -->
 ## Scope
