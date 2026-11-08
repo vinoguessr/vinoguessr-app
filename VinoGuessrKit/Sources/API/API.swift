@@ -6,7 +6,7 @@ import MemberwiseInit
 /// Endpoints that require an authenticated user, identified by a bearer token.
 @MemberwiseInit(.public)
 public struct API: APIEndpoint, Sendable {
-  public var baseURL: URL = URL(string: "https://api.blindlog.me")!
+  public var baseURL: URL = URL(string: "https://api.vinoguessr.com")!
   public var httpClient: URLSession = .shared
   public var token: String
 

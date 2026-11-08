@@ -1,7 +1,7 @@
 import Testing
 @testable import API
 
-/// Live, read-only integration tests against the Blindlog API: create a guest
+/// Live, read-only integration tests against the VinoGuessr API: create a guest
 /// account, then exercise authenticated GET endpoints that do not mutate
 /// server state.
 @Suite(.serialized)

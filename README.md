@@ -1,5 +1,5 @@
-# BlindLogApp
-BlindLog App
+# VinoGuessr
+VinoGuessr app for iOS, iPadOS, and macOS
 
 <!-- vinoguessr-foundation -->
 ## Scope
