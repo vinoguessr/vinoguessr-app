@@ -7,6 +7,9 @@ DerivedData/
 .swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 .netrc
 .derived-data-log-*
+
+# VinoGuessr foundation baseline (vinoguessr/.github)
+__pycache__/
 .env
 .env.*
 !.env.example

@@ -90,7 +90,7 @@ SwiftUI app for players. iOS, iPadOS, and macOS 27.0 or later. Provides the UI f
 
 The VinoGuessr API is the source of truth. Sign-in uses passkeys and email one-time codes. Tokens are stored in the Keychain, and scores or participation are never finalized from app-side values.
 
-After implementing, run build/test for `VinoGuessr` with the target Xcode and `swift test` for `VinoGuessrKit`, and check the main flows with Xcode MCP and the Simulator. Do not add compatibility branches for older OS versions.
+After implementing, build the `VinoGuessr` app with the target Xcode, run `swift test` for `VinoGuessrKit` (the app target has no tests of its own), and check the main flows with Xcode MCP and the Simulator. Do not add compatibility branches for older OS versions.
 
 ## SwiftUI policy — iOS/iPadOS/macOS 27.0+
 
