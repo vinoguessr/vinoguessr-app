@@ -1,6 +1,4 @@
 import Foundation
-import MultipartKit
-import HTTPTypes
 import API
 
 enum ImageUploadError: Error {
@@ -13,13 +11,13 @@ extension API {
   ///
   /// The upload URL returned by `createImageUploadURL()` is a Cloudflare Images
   /// direct-upload endpoint, which expects a `multipart/form-data` POST with a
-  /// `file` field. The body is serialized with MultipartKit. After the bytes are
+  /// `file` field, built by `imageUploadBody(for:boundary:)`. After the bytes are
   /// uploaded, the image is registered via `createImage(_:)`.
   func uploadImage(_ data: Data) async throws -> UUID {
     let upload = try await createImageUploadURL()
 
     let boundary = "Boundary-\(UUID().uuidString)"
-    let body = Self.multipartBody(for: data, boundary: boundary)
+    let body = Self.imageUploadBody(for: data, boundary: boundary)
 
     var request = URLRequest(url: upload.uploadURL)
     request.httpMethod = "POST"
@@ -31,16 +29,5 @@ extension API {
 
     let image = try await createImage(CreateImageRequest(imageID: upload.imageID))
     return image.id
-  }
-
-  /// Serializes a single `file` form-data part containing the raw image bytes.
-  private static func multipartBody(for data: Data, boundary: String) -> Data {
-    let headerFields: HTTPFields = [
-      HTTPField.Name("Content-Disposition")!: "form-data; name=\"file\"; filename=\"image\"",
-      HTTPField.Name("Content-Type")!: "application/octet-stream",
-    ]
-    let part = MultipartPart<[UInt8]>(headerFields: headerFields, body: [UInt8](data))
-    let bytes = MultipartSerializer(boundary: boundary).serialize(parts: [part], into: [UInt8].self)
-    return Data(bytes)
   }
 }
