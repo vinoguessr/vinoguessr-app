@@ -32,8 +32,6 @@ let package = Package(
         .product(name: "Valet", package: "Valet"),
         .product(name: "Defaults", package: "Defaults"),
         .product(name: "DefaultsMacros", package: "Defaults"),
-        .product(name: "MultipartKit", package: "multipart-kit"),
-        .product(name: "HTTPTypes", package: "swift-http-types"),
       ]
     ),
     .target(
@@ -42,6 +40,8 @@ let package = Package(
         .product(name: "HTTPClient", package: "swift-http-api-proposal"),
         .product(name: "MemberwiseInit", package: "swift-memberwise-init-macro"),
         .product(name: "Currency", package: "swift-currency"),
+        .product(name: "MultipartKit", package: "multipart-kit"),
+        .product(name: "HTTPTypes", package: "swift-http-types"),
       ],
       swiftSettings: [
         .enableUpcomingFeature("ExistentialAny"),
