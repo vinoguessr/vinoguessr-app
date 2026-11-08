@@ -20,7 +20,7 @@ let package = Package(
     .package(url: "https://github.com/square/Valet.git", from: "5.0.0"),
     .package(url: "https://github.com/sindresorhus/Defaults.git", from: "9.0.0"),
     .package(url: "https://github.com/gohanlon/swift-memberwise-init-macro.git", from: "0.6.0"),
-    .package(url: "https://github.com/vapor/multipart-kit.git", exact: "5.0.0-alpha.5"),
+    .package(url: "https://github.com/vapor/multipart-kit.git", exact: "5.0.0-beta.2"),
     .package(url: "https://github.com/apple/swift-http-types.git", from: "1.0.0"),
     .package(url: "https://github.com/zunda-pixel/swift-currency.git", from: "0.0.1"),
   ],
