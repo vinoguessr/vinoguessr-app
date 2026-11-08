@@ -7,3 +7,22 @@ DerivedData/
 .swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 .netrc
 .derived-data-log-*
+
+# VinoGuessr foundation baseline (vinoguessr/.github)
+__pycache__/
+.env
+.env.*
+!.env.example
+.build/
+.swiftpm/
+*.xcuserstate
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfvars
+!*.tfvars.example
+*.p12
+*.p8
+*.key
+*.pem
