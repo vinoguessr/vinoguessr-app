@@ -14,7 +14,7 @@ import API
 /// apple-app-site-association must list this app, or the system rejects the
 /// request at runtime.
 enum Passkey {
-  static let relyingPartyID = "api.vinoguessr.com"
+  static let relyingPartyID = "vinoguessr.com"
 
   enum PasskeyError: Error { case invalidChallenge, unexpectedResult }
 
