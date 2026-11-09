@@ -55,9 +55,19 @@ jobs:
           persist-credentials: false
       - name: Show the selected Xcode
         run: xcodebuild -version
-      # The project has no Package.resolved of its own yet, so this build resolves package versions
-      # itself, and -skipMacroValidation trusts whichever macro versions resolve
-      # (https://github.com/vinoguessr/vinoguessr-app/issues/19).
+      # Without a Package.resolved of its own, the project falls back to VinoGuessrKit/Package.resolved
+      # (observed Xcode behavior, not documented; the Build step fails if a future Xcode stops doing it),
+      # so the app and test-kit build the same pinned versions. A project-level file would take precedence
+      # for the app build, and Dependabot would not update it, so the two could drift apart.
+      - name: Check that the app uses VinoGuessrKit/Package.resolved
+        run: |
+          resolved=VinoGuessr.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+          if [ -e "$resolved" ]; then
+            echo "::error file=$resolved::Remove $resolved: VinoGuessrKit/Package.resolved pins the app's packages, so add dependencies to VinoGuessrKit/Package.swift."
+            exit 1
+          fi
+      # -onlyUsePackageVersionsFromResolvedFile fails instead of resolving when VinoGuessrKit/Package.resolved
+      # is out of date, so -skipMacroValidation trusts only the macro packages pinned there, as in test-kit.
       - name: Build
         run: |
           xcodebuild build \
@@ -65,6 +75,7 @@ jobs:
             -scheme VinoGuessr \
             -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath "$RUNNER_TEMP/DerivedData" \
+            -onlyUsePackageVersionsFromResolvedFile \
             -skipMacroValidation \
             CODE_SIGNING_ALLOWED=NO \
             | xcbeautify --renderer github-actions
