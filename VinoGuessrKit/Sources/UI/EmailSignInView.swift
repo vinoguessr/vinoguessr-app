@@ -27,10 +27,8 @@ struct EmailSignInView: View {
         Section {
           TextField("Email", text: $email)
             .textContentType(.emailAddress)
-            #if os(iOS)
             .textInputAutocapitalization(.never)
             .keyboardType(.emailAddress)
-            #endif
             .disableAutocorrection(true)
             .disabled(codeSent)
         }
@@ -39,9 +37,7 @@ struct EmailSignInView: View {
           Section("Verification Code") {
             TextField("One-time code", text: $otp)
               .textContentType(.oneTimeCode)
-              #if os(iOS)
               .keyboardType(.numberPad)
-              #endif
           }
         }
 
