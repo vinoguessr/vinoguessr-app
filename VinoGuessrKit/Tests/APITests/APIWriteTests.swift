@@ -6,7 +6,7 @@ import Currency
 /// Live integration tests that mutate server state (create profile, image
 /// upload URL, and the full event → question → answer → response lifecycle).
 /// These create real records via the production API.
-@Suite(.serialized)
+@Suite(.serialized, .liveAPI)
 struct APIWriteTests {
   var authAPI = AuthAPI()
 

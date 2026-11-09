@@ -19,6 +19,8 @@ xcodebuild build -project VinoGuessr.xcodeproj -scheme VinoGuessr -destination '
 cd VinoGuessrKit && xcodebuild test -scheme VinoGuessrKit -destination 'platform=iOS Simulator,name=iPhone 17'
 ```
 
+`APIReadTests` and `APIWriteTests` call the production API, and `APIWriteTests` creates records there, so they run only when `VINOGUESSR_LIVE_API_TESTS=1`; `xcodebuild test` forwards it to the tests only as `TEST_RUNNER_VINOGUESSR_LIVE_API_TESTS=1`. The `Build and test` workflow runs the same build and the offline tests on every PR.
+
 Do not add compatibility branches for older OS versions.
 
 Follow [AGENTS.md](AGENTS.md) and [CONTRIBUTING.md](CONTRIBUTING.md): satisfy the Issue's dependencies, then implement with an independent Review Agent running in parallel. Shared rules source: [vinoguessr/.github@38adaa6afdfb](https://github.com/vinoguessr/.github/tree/38adaa6afdfb7df020feb2a7ff93a6ddf1d79af8).
