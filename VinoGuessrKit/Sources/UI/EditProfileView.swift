@@ -171,8 +171,8 @@ struct EditProfileView: View {
     // them, rather than transferring the same item a second time as an Image.
     let data = try? await item.loadTransferable(type: Data.self)
     imageData = data
-    if let data, let platformImage = PlatformImage(data: data) {
-      previewImage = Image(platformImage)
+    if let data, let uiImage = UIImage(data: data) {
+      previewImage = Image(uiImage: uiImage)
     } else {
       previewImage = nil
     }

@@ -157,8 +157,8 @@ struct CreateEventView: View {
 
       Section("Image") {
         PhotosPicker("Select Image", selection: $pickedItem, matching: .images)
-        if let imageData, let image = PlatformImage(data: imageData) {
-          Image(image)
+        if let imageData, let image = UIImage(data: imageData) {
+          Image(uiImage: image)
             .resizable()
             .scaledToFit()
             .frame(maxHeight: 160)
@@ -412,21 +412,5 @@ extension EventVisibility {
     case .unlisted: "Unlisted"
     case .private: "Private"
     }
-  }
-}
-
-#if os(macOS)
-typealias PlatformImage = NSImage
-#else
-typealias PlatformImage = UIImage
-#endif
-
-extension SwiftUI.Image {
-  init(_ image: PlatformImage) {
-    #if os(macOS)
-    self.init(nsImage: image)
-    #else
-    self.init(uiImage: image)
-    #endif
   }
 }
