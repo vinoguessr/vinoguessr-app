@@ -1,0 +1,66 @@
+name: Build and test
+on:
+  # Not on pushes to codex/** branches: every PR commit would run the macOS jobs twice.
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: build-and-test-${{ github.ref }}
+  cancel-in-progress: true
+env:
+  # VinoGuessrKit requires the iOS 27 SDK, which only the xcode-27 runner image ships. Name the Xcode
+  # release instead of using the image default, so an image update cannot change the toolchain unnoticed.
+  DEVELOPER_DIR: /Applications/Xcode_27.1.app/Contents/Developer
+defaults:
+  run:
+    # An explicit bash shell runs with -o pipefail, so piping into xcbeautify keeps xcodebuild's exit status.
+    shell: bash
+jobs:
+  test-kit:
+    name: Test VinoGuessrKit (iOS Simulator)
+    runs-on: xcode-27
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Show the selected Xcode
+        run: xcodebuild -version
+      # The live API suites are skipped here: they run only with VINOGUESSR_LIVE_API_TESTS=1
+      # (Tests/APITests/LiveAPITrait.swift). xcodebuild cannot approve package macros interactively,
+      # so -skipMacroValidation trusts the macro packages pinned in Package.resolved.
+      - name: Test
+        working-directory: VinoGuessrKit
+        run: |
+          xcodebuild test \
+            -scheme VinoGuessrKit \
+            -destination 'platform=iOS Simulator,name=iPhone 17,OS=27.0' \
+            -derivedDataPath "$RUNNER_TEMP/DerivedData" \
+            -onlyUsePackageVersionsFromResolvedFile \
+            -skipMacroValidation \
+            | xcbeautify --renderer github-actions
+  build-app:
+    name: Build VinoGuessr (iOS Simulator)
+    runs-on: xcode-27
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Show the selected Xcode
+        run: xcodebuild -version
+      # The project has no Package.resolved of its own yet, so this build resolves package versions
+      # itself (https://github.com/vinoguessr/vinoguessr-app/issues/19).
+      - name: Build
+        run: |
+          xcodebuild build \
+            -project VinoGuessr.xcodeproj \
+            -scheme VinoGuessr \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath "$RUNNER_TEMP/DerivedData" \
+            -skipMacroValidation \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcbeautify --renderer github-actions
