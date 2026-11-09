@@ -8,8 +8,9 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: build-and-test-${{ github.ref }}
-  # Cancel superseded PR runs only, so that every commit on main keeps a finished run.
+  # A new PR commit cancels the PR's superseded run. Other runs get a group per commit: a shared group
+  # keeps only one pending run, so back-to-back merges to main would otherwise skip commits.
+  group: build-and-test-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 env:
   # VinoGuessrKit requires the iOS 27 SDK, which only the xcode-27 runner image ships. Name the Xcode
