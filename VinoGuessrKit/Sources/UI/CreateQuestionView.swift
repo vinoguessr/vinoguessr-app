@@ -73,8 +73,8 @@ struct CreateQuestionView: View {
 
         Section("Image") {
           PhotosPicker("Select Image", selection: $pickedItem, matching: .images)
-          if let imageData, let image = PlatformImage(data: imageData) {
-            Image(image)
+          if let imageData, let image = UIImage(data: imageData) {
+            Image(uiImage: image)
               .resizable()
               .scaledToFit()
               .frame(maxHeight: 160)
