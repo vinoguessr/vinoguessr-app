@@ -9,7 +9,8 @@ permissions:
   contents: read
 concurrency:
   group: build-and-test-${{ github.ref }}
-  cancel-in-progress: true
+  # Cancel superseded PR runs only, so that every commit on main keeps a finished run.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 env:
   # VinoGuessrKit requires the iOS 27 SDK, which only the xcode-27 runner image ships. Name the Xcode
   # release instead of using the image default, so an image update cannot change the toolchain unnoticed.
@@ -53,7 +54,8 @@ jobs:
       - name: Show the selected Xcode
         run: xcodebuild -version
       # The project has no Package.resolved of its own yet, so this build resolves package versions
-      # itself (https://github.com/vinoguessr/vinoguessr-app/issues/19).
+      # itself, and -skipMacroValidation trusts whichever macro versions resolve
+      # (https://github.com/vinoguessr/vinoguessr-app/issues/19).
       - name: Build
         run: |
           xcodebuild build \
