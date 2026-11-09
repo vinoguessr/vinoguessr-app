@@ -84,7 +84,7 @@ This GitHub review is in addition to the independent Review Agent running in par
 
 ## vinoguessr-app specifics
 
-Shared rules source: `vinoguessr/.github@01fd9c61bce2139beb8ea173339d45c02d49b69f`.
+Shared rules source: `vinoguessr/.github@38adaa6afdfb7df020feb2a7ff93a6ddf1d79af8`.
 
 SwiftUI app for players. iOS and iPadOS 27.0 or later; macOS and visionOS are deferred ([ADR-0006](https://github.com/vinoguessr/vinoguessr-docs/blob/main/docs/adr/0006-app-platforms.md)). Provides the UI for creating events, setting questions, answering, scoring, and the player's page.
 
@@ -145,4 +145,4 @@ For UI changes, build/test on the target SDK and check iPhone/iPad resizing, Dyn
 
 Apple contracts: [Observation migration](https://developer.apple.com/documentation/swiftui/migrating-from-the-observable-object-protocol-to-the-observable-macro), [State](https://developer.apple.com/documentation/swiftui/state), [NavigationStack](https://developer.apple.com/documentation/swiftui/navigationstack), [Layout](https://developer.apple.com/documentation/swiftui/layout), [ArrangementView](https://developer.apple.com/documentation/swiftui/arrangementview). Skill: [SwiftUI Agent Skill](https://github.com/AvdLee/SwiftUI-Agent-Skill).
 
-SwiftUI policy source: `vinoguessr/.github@01fd9c61bce2139beb8ea173339d45c02d49b69f:policies/swiftui.md`.
+SwiftUI policy source: `vinoguessr/.github@38adaa6afdfb7df020feb2a7ff93a6ddf1d79af8:policies/swiftui.md`.
