@@ -33,7 +33,9 @@ jobs:
         run: xcodebuild -version
       # The live API suites are skipped here: they run only with VINOGUESSR_LIVE_API_TESTS=1
       # (Tests/APITests/LiveAPITrait.swift). xcodebuild cannot approve package macros interactively,
-      # so -skipMacroValidation trusts the macro packages pinned in Package.resolved.
+      # so -skipMacroValidation trusts the macro packages pinned in Package.resolved. The output is not
+      # piped into xcbeautify, which left out some Swift Testing result lines and the "Test run with
+      # N tests" summary, so the log would under-report what ran.
       - name: Test
         working-directory: VinoGuessrKit
         run: |
@@ -42,8 +44,7 @@ jobs:
             -destination 'platform=iOS Simulator,name=iPhone 17,OS=27.0' \
             -derivedDataPath "$RUNNER_TEMP/DerivedData" \
             -onlyUsePackageVersionsFromResolvedFile \
-            -skipMacroValidation \
-            | xcbeautify --renderer github-actions
+            -skipMacroValidation
   build-app:
     name: Build VinoGuessr (iOS Simulator)
     runs-on: xcode-27
